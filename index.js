@@ -1,5 +1,7 @@
 // Validators
 (function(window, document) {
+  const createStore = Redux.createStore;
+
   const validators = {
     required: function (el) {
       return el.value.length;
@@ -25,9 +27,7 @@
   const Boss = {
     constructor: this,
     errorClass: 'boss--error',
-
-    messages,
-    validators,
+    errors: [],
 
     validate: function (form, validations) {
       this.form = form;
@@ -41,7 +41,11 @@
             let validate = validators[rule];
 
             if (!validate(el, rules[rule])) {
-              this.helpers.appendError.call(this, el, rule, rules[rule]);
+              this.errors.push({
+                el,
+                rule,
+                value: rules[rule]
+              });
             }
           });
         }
@@ -55,12 +59,15 @@
       insertAfter: function (newNode, referenceNode) {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
       },
+      removeNode: function (el) {
+        el.parentElement.removeChild(el);
+      },
       appendError: function (el, rule, ruleValue) {
         let span = document.createElement('span');
-        span.innerText = this.helpers.supplant(this.messages[rule], {
+        span.innerText = this.helpers.supplant(messages[rule], {
           val: ruleValue
         });
-        span.className = `${this.errorClass} boss-error-${rule}`;
+        span.className = `${this.errorClass} boss--error-${rule}`;
 
         this.helpers.insertAfter(span, el);
       },
@@ -76,8 +83,6 @@
   window.Boss = Boss;
 })(window, document);
 
-Boss.nass = 'Limite do front-end';
-
 let form = document.querySelector('#form');
 
 let validations = {
@@ -92,4 +97,10 @@ let validations = {
   }
 };
 
-Boss.validate(form, validations);
+Boss.setErrorClass('TESTEEEEE');
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  Boss.validate(form, validations);
+});
