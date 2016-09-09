@@ -5,16 +5,61 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Boss</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body { font-family: Arial; }
+
+    .boss--error {
+      display: block;
+    }
+
+    .form-group {
+      margin: 20px 0;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 13px;
+
+      border: 1px solid #eee;
+    }
+
+    input.boss--is-wrong {
+      border: 1px solid red;
+    }
+
+    .boss--error {
+      background: red;
+      color: white;
+      padding: 5px;
+      font-size: 10px;
+    }
+  </style>
 </head>
 <body>
   <form action="" id="form">
-    <input type="text" name="name" />
-    <input type="email" name="email" />
+    <div class="form-group"><input id="name" type="text" name="name" placeholder="Nome" /></div>
+    <div class="form-group"><input type="number" name="age" placeholder="Age" /></div>
+    <div class="form-group"><input type="email" name="email" placeholder="Email" /></div>
+    <div class="form-group"><input type="text" name="cep" placeholder="CEP" /></div>
+    <div class="form-group"><input type="text" name="renavam" placeholder="Renavam" /></div>
+    <div class="form-group"><input type="url" name="url" placeholder="URL" /></div>
+    <div class="form-group"><input type="text" name="cc" placeholder="Credit Card" /></div>
+    <div class="form-group"><input type="file" name="photo" placeholder="Photo" /></div>
+    <div class="form-group"><span>Termos</span><input type="checkbox" name="terms" /></div>
+    <div class="form-group">
+      <span>Gender</span>
+      <input type="radio" name="gender" value="F" />F
+      <input type="radio" name="gender" value="M" />M
+    </div>
 
     <button>Send</button>
   </form>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.min.js"></script>
   <script src="index.js"></script>
 </body>
 </html>
