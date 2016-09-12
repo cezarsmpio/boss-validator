@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Boss</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
   <style>
     * {
@@ -36,7 +37,7 @@
       background: red;
       color: white;
       padding: 5px;
-      font-size: 10px;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -60,6 +61,58 @@
     <button>Send</button>
   </form>
 
-  <script src="index.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Object.keys,Promise,String.prototype.endsWith,Element.prototype.classList"></script>
+  <script src="js/boss.core.js"></script>
+  <script>
+    var form = document.querySelector('#form');
+
+    var validations = {
+      name: {
+        required: true,
+        ends: 'a'
+      },
+      age: {
+        between: [[5, 10], [50, 70]]
+      },
+      photo: {
+        required: true,
+        extensions: ['jpg', 'png']
+      },
+      email: {
+        email: true
+      },
+      cep: {
+        regex: {
+          value: /^\d{5}-\d{3}$|^\d{8}$/,
+          message: 'Please, fill in this format 00.000-000.'
+        }
+      },
+      renavam: {
+        exact: 10,
+        number: true
+      },
+      url: {
+        required: true,
+        url: true,
+        https: true
+      },
+      terms: {
+        required: true
+      },
+      cc: {
+        credit_card: true
+      }
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var validate = Boss.validate(form, validations);
+
+      validate.catch(function (err) {
+        console.log(err);
+      });
+    });
+  </script>
 </body>
 </html>
