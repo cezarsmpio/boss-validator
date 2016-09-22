@@ -1,4 +1,4 @@
-# boss.validator
+# boss-validator
 
 > The simplest library to validate data or forms.
 
@@ -64,11 +64,11 @@
 
 #### npm
 ```
-npm install boss.validator
+npm install boss-validator
 ```
 #### bower
 ```
-bower install boss.validator
+bower install boss-validator
 ```
 
 #### CDN
@@ -252,7 +252,7 @@ Boss.setErrorClass('error__field');
 Why not to help?
 
 - [x] :rocket:
-- [x] Publish on `npm install -i boss.validator` and `bower install bower.validator`
+- [x] Publish on `npm install -i boss-validator` and `bower install boss-validator`
 - [ ] Improve and review the messages
 - [ ] Create a easy way to extend I18n messages
 - [ ] Create unit tests !important
@@ -263,7 +263,7 @@ Why not to help?
 
 ## Browser Support
 
-The lib `boss.validator` needs to support these features:
+The lib `boss-validator` needs to support these features:
 
 * `Object.keys`
 * `Promise`

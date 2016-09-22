@@ -1,5 +1,5 @@
 {
-  "name": "boss.validator",
+  "name": "boss-validator",
   "description": "The simplest library to validate data or forms.",
   "main": "dist/js/boss.min.js",
   "authors": [
