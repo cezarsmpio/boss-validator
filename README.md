@@ -2,18 +2,6 @@
 
 > The simplest library to validate data or forms.
 
-```
-npm install boss.validator
-```
-
-```
-bower install boss.validator
-```
-
-```html
-<script src="https://cdn.rawgit.com/cezarlz/boss/master/dist/js/boss.min.js"></script>
-```
-
 ```html
 <form id="contact">
   <input name="fullname" required />
@@ -63,10 +51,27 @@ bower install boss.validator
 
 ## Index
 
-* [Validators](#Validators)
-* [Messages](#Messages)
-* [Methods](#Methods)
-* [TODO](#TODO)
+* [Installation](#installation)
+* [Validators](#validators)
+* [Messages](#messages)
+* [Methods](#methods)
+* [TODO](#todo)
+
+## Installation
+
+#### npm
+```
+npm install boss.validator
+```
+#### bower
+```
+bower install boss.validator
+```
+
+#### CDN
+```html
+<script src="https://cdn.rawgit.com/cezarlz/boss/master/dist/js/boss.min.js"></script>
+```
 
 ## Validators
 
