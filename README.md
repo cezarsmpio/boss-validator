@@ -4,10 +4,12 @@
 
 ```html
 <form id="contact">
-  <input name="fullname" required />
-  <input name="email" required />
-  <input name="age" />
-  <textarea name="message" required></textarea>
+  <input type="text" name="fullname" placeholder="Your full name" />
+  <input type="email" name="email" placeholder="Valid emails adress" />
+  <input type="number" name="age" placeholder="Your age" />
+  <textarea name="message" placeholder="Your message"></textarea>
+
+  <button>Send!</button>
 </form>
 
 <script>
@@ -56,6 +58,7 @@
 * [Messages](#messages)
 * [Methods](#methods)
 * [TODO](#todo)
+* [Browser Support](#browser-support)
 
 ## Installation
 
@@ -257,6 +260,23 @@ Why not to help?
 - [ ] Improve this documentation
 - [ ] Create gh-pages branch
 - [ ] Create a logo
+
+## Browser Support
+
+The `boss.validators` needs to support these features:
+
+* `Object.keys`
+* `Promise`
+* `String.prototype.endsWith`
+* `Element.prototype.classList`
+* `Object.assign`
+
+If you aren't sure about these features, please, use this smart polyfill:
+
+```html
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Object.keys,Promise,String.prototype.endsWith,Element.prototype.classList,Object.assign"></script>
+```
+
 
 ---
 
