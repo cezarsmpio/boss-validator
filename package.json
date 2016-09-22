@@ -1,8 +1,8 @@
 {
   "name": "boss-validator",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The simplest library to validate data or forms.",
-  "main": "src/js/index.js",
+  "main": "src/js/boss.core.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
@@ -10,18 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cezarlz/boss.git"
+    "url": "git+https://github.com/cezarlz/boss-validator.git"
   },
   "keywords": [
     "js",
     "validator",
     "form",
-    "validator",
     "vanilla",
     "javascript",
     "functional",
     "es6",
-    "es5"
+    "es5",
+    "boss",
+    "validation",
+    "nojquery",
+    "justjs",
+    "small",
+    "minified",
+    "gzip"
   ],
   "author": "Cezar Luiz",
   "license": "MIT",
