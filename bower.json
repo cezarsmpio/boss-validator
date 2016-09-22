@@ -1,0 +1,28 @@
+{
+  "name": "boss.validator",
+  "description": "The simplest library to validate data or forms.",
+  "main": "dist/js/boss.min.js",
+  "authors": [
+    "Cezar Luiz"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "js",
+    "validator",
+    "form",
+    "validator",
+    "vanilla",
+    "javascript",
+    "functional",
+    "es6",
+    "es5"
+  ],
+  "homepage": "https://github.com/cezarlz/boss",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

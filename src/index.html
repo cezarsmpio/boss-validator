@@ -57,11 +57,17 @@
       <input type="radio" name="gender" value="F" />F
       <input type="radio" name="gender" value="M" />M
     </div>
+    <div class="form-group">
+      <select name="uf">
+        <option disabled>Selecione um país</option>
+        <option value="BRA">Brasil</option>
+      </select>
+    </div>
 
     <button>Send</button>
   </form>
 
-  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Object.keys,Promise,String.prototype.endsWith,Element.prototype.classList"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Object.keys,Promise,String.prototype.endsWith,Element.prototype.classList,Object.assign"></script>
   <script src="js/boss.core.js"></script>
   <script>
     var form = document.querySelector('#form');
@@ -69,7 +75,8 @@
     var validations = {
       name: {
         required: true,
-        ends: 'a'
+        ends: 'a',
+        starts: '1'
       },
       age: {
         between: [[5, 10], [50, 70]]
@@ -100,9 +107,30 @@
         required: true
       },
       cc: {
-        credit_card: true
+        br_phone: true
+      },
+      uf: {
+        contains: 'A'
       }
     };
+
+    //
+    // Boss.configure({
+    //   errorElement: 'h1'
+    // });
+
+    // Boss.configureMessages({
+    //   required: 'UHAHUAUUAHAUHA',
+    //   default: '11111111111',
+    // });
+
+    // Boss.addValidator({
+    //   name: 'br_phone',
+    //   validator: function (el, value) {
+    //     return el.value == 1;
+    //   },
+    //   message: 'The value needs to be {val}'
+    // });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();

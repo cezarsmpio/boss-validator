@@ -1,5 +1,5 @@
-import validators from './boss.validators';
-import messages from './boss.messages';
+import v from './boss.validators';
+import m from './boss.messages';
 
 let Boss = {
   // Private attr
@@ -8,9 +8,36 @@ let Boss = {
 
   // Public attrs
   errors: [],
-  sendErrors: true,
+  options: {
+    appendErrors: true,
+    errorElement: 'label'
+  },
+  validators: v,
+  messages: m,
 
   // Public Methods
+  configure: function(newOptions) {
+    this.options = Object.assign({}, this.options, newOptions);
+  },
+
+  configureMessages: function (msgs) {
+    try {
+      if (this._typeof(msgs) !== 'object') {
+        throw new Error('configureMessages: Please, your messages needs to be an object of keys and values (string).');
+      }
+
+      this.messages = Object.assign({}, this.messages, msgs);
+    }
+    catch (err) {
+      console.error(err.getMessage());
+    }
+  },
+
+  addValidator: function (v) {
+    this.validators[v.name] = v.validator.bind(this);
+    this.messages[v.name] = v.message || false;
+  },
+
   validate: function (form, validations) {
     var self = this;
     self.form = form;
@@ -22,36 +49,41 @@ let Boss = {
       for (let i = 0, t = vals.length; i < t; i++) {
         let name = vals[i];
         let el = form[name];
-        let rules = validations[name];
 
         if (el) {
-          Object.keys(rules).some(r => {
-            if (('required' in rules) || el.value.length) {
-              let validate = validators[r].bind(self);
+          let rules = validations[name];
+          let rulesKeys = Object.keys(rules);
+
+          for (let j = 0, tt = rulesKeys.length; j < tt; j++) {
+            let r = rulesKeys[j];
+
+            if ((rules.hasOwnProperty('required')) || el.value.length) {
+              let validate = self.validators[r];
               let rule = rules[r];
-              let message = messages[r];
-              let value = rule;
+              let message = self.messages[r];
 
               if (self._typeof(rule) === 'object') {
                 message = rule.message;
                 value = rule.value;
               }
 
-              if (!validate(el, value, rules)) {
+              if (!validate.call(this, el, rule, rules)) {
                 self.errors.push({
                   el,
                   rule: r,
-                  value,
-                  message: message || messages['default']
+                  value: rule,
+                  message: self._supplant(message || self.messages['default'], {
+                    val: rule.toString()
+                  })
                 });
               }
             }
-          });
-        }
-      }
+          } // end for
+        } // end if
+      } // end for
 
       if (self.errors.length) {
-        if (self.sendErrors) self._sendErrors();
+        if (self._typeof(form) === 'htmlformelement' && self.options.appendErrors) self._appendErrors();
 
         return reject(self.errors);
       }
@@ -82,7 +114,7 @@ let Boss = {
     }
   },
 
-  _sendErrors: function () {
+  _appendErrors: function () {
     let errors = this.errors;
 
     this._clearErrors();
@@ -99,9 +131,9 @@ let Boss = {
     el.parentElement.removeChild(el);
   },
   _appendError: function (err) {
-    let label = document.createElement('label');
+    let label = document.createElement(this.options.errorElement || 'label');
 
-    label.innerText = this._supplant(err.message, {
+    label.innerHTML = this._supplant(err.message, {
       val: err.value.toString()
     });
 
