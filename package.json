@@ -1,6 +1,6 @@
 {
   "name": "boss.validator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The simplest library to validate data or forms.",
   "main": "src/js/index.js",
   "scripts": {

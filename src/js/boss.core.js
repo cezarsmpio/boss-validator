@@ -67,7 +67,7 @@ let Boss = {
                 value = rule.value;
               }
 
-              if (!validate.call(this, el, rule, rules)) {
+              if (!validate.call(self, el, rule, rules)) {
                 self.errors.push({
                   el,
                   rule: r,
@@ -82,11 +82,11 @@ let Boss = {
         } // end if
       } // end for
 
-      if (self.errors.length) {
-        if (self._typeof(form) === 'htmlformelement' && self.options.appendErrors) self._appendErrors();
-
-        return reject(self.errors);
+      if (self._typeof(form) === 'htmlformelement' && self.options.appendErrors) {
+        self._appendErrors();
       }
+
+      if (self.errors.length) return reject(self.errors);
 
       return resolve();
     });
