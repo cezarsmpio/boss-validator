@@ -256,6 +256,7 @@ Why not to help?
 - [ ] Create more useful validators
 - [ ] Improve this documentation
 - [ ] Create gh-pages branch
+- [ ] Create a logo
 
 ---
 
