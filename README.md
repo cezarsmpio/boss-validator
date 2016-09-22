@@ -263,7 +263,7 @@ Why not to help?
 
 ## Browser Support
 
-The `boss.validators` needs to support these features:
+The lib `boss.validator` needs to support these features:
 
 * `Object.keys`
 * `Promise`
