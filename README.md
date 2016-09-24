@@ -182,6 +182,34 @@ let rules = {
 Boss.validate(fields, rules);
 ```
 
+If you want, you can override and create a custom message at the moment of the validation. You just need pass an object with the properties `value` and `message`.
+
+```javascript
+let form = document.querySelector('#contact-form');
+
+let rules = {
+  email: {
+    required: true,
+    email: {
+      value: true,
+      message: 'Introduzca una dirección de correo electrónico válida.'
+    }
+  },
+  cep: {
+    required: {
+      value: true,
+      message: 'Por favor, este campo é obrigatório.'
+    },
+    regex: {
+      value: /^\d{2}\.\d{3}-\d{3}$/,
+      message: 'O CEP deve ser preenchido no seguinte formato: 00.000-00.'
+    }
+  }
+};
+
+Boss.validate(form, rules);
+```
+
 ### Boss.configure(object)
 
 ```javascript
