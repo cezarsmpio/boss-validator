@@ -1,4 +1,6 @@
-# boss-validator
+![Boss Validator] http://image.prntscr.com/image/c929ac654897412cb31b7f0b6b2c9443.png
+
+# Boss Validator
 
 > The simplest library to validate data or forms.
 
