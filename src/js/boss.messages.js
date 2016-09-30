@@ -30,7 +30,7 @@ const messages = {
   credit_card: 'Please, enter a valid credit card number.',
   ip_v4: 'Please, enter a valid IPV4 address. (ex: 172.16.254.1)',
   ip_v6: 'Please, enter a valid IPV6 address. (ex: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
-  alpha: 'Must only contain letters.',
+  alpha: 'Only letters are allowed.',
   alpha_numeric: 'No special characters allowed, just numbers and letters',
 };
 
