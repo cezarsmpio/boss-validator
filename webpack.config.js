@@ -16,13 +16,6 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true
   },
-  devServer: {
-    inline: true,
-    progress: true,
-    colors: true,
-    open: true,
-    contentBase: path.join(__dirname, 'dist')
-  },
   module: {
     loaders: [
       {
