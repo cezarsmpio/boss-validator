@@ -118,7 +118,7 @@ bower install boss-validator
 
 ## Messages
 
-For each validator, also have a error message. There is also a default message to cases where doesn't have a message to a validator, this is the `default` and you can override it.
+For each validator, there is a specific error message. There is also a default message for cases where there isn't a specific message for that validator, this is `default` and you can override it.
 
 ```javascript
 const messages = {
@@ -164,7 +164,7 @@ const messages = {
 
 ### Boss.validate(object, rules)
 
-For each object in `object`, it needs to have the `value` property.
+For each object in `object`, there must be a `value` property.
 
 ```javascript
 let fields = {
@@ -182,7 +182,7 @@ let rules = {
 Boss.validate(fields, rules);
 ```
 
-If you want, you can override and create a custom message at the moment of the validation. You just need pass an object with the properties `value` and `message`.
+If you want, you can override and create a custom messages at the moment of validation. You just need to pass an object with the properties `value` and `message`.
 
 ```javascript
 let form = document.querySelector('#contact-form');
@@ -251,7 +251,7 @@ Boss.validate(form, {
 });
 ```
 
-You can create a validator and pass its message too.
+You can create a validator and pass its message.
 
 ```javascript
 Boss.addValidator({
