@@ -56,7 +56,7 @@
 * [Installation](#installation)
 * [Validators](#validators)
 * [Messages](#messages)
-* [Transforms](#filters)
+* [Transforms](#transforms)
 * [Methods](#methods)
 * [TODO](#todo)
 * [Browser Support](#browser-support)
@@ -165,7 +165,7 @@ Transforms are a way to change the data of your form or object. You can call it 
 
 It's simple, take a look:
 
-```
+```javascript
 let transformedData = Boss.transform(yourData, {
   name: ['trim', 'uppercase'], // array of filters
   key: ['trim', 'base64_encode'],
