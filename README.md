@@ -246,6 +246,8 @@ Boss.validate(form, rules);
 
 ### Boss.transform(data, transforms)
 
+Returns the filtered data.
+
 ### Boss.configure(object)
 
 ```javascript
