@@ -39,7 +39,7 @@ const validators = {
       return false;
     }
 
-    throw new Error('Please, in "between" validator, provide an array at least two values.');
+    throw new Error('"between" validator needs an array of at least one array of two values.');
   },
 
   // Strings
