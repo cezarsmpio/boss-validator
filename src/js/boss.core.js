@@ -1,5 +1,6 @@
-import v from './boss.validators';
-import m from './boss.messages';
+let v = require('./boss.validators');
+let m = require('./boss.messages');
+let f = require('./boss.filters');
 
 let Boss = {
   // Private attr
