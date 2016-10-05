@@ -118,4 +118,4 @@ const validators = {
   },
 };
 
-export default validators;
+module.exports = validators;
