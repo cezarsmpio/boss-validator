@@ -101,7 +101,7 @@ let Boss = {
 
     if (self.errors.length) return Promise.reject(self.errors);
 
-    if (self._typeof(filters) === 'object') return Promise.resolve({ filtered: self._filter(data, filters), source: data });
+    if (self._typeof(filters) === 'object') return Promise.resolve({ transformed: self._filter(data, filters), source: data });
 
     return Promise.resolve({ source: data });
   },
