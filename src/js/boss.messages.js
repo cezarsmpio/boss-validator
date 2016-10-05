@@ -7,7 +7,7 @@ const messages = {
   less_equal: 'The value needs to be less than or equal to {val}.',
   bigger: 'The value needs to be bigger than {val}.',
   bigger_equal: 'The value needs to be less than or equal to {val}.',
-  between: 'The value must be between {val}',
+  between: 'The value must be between {val}.',
   number: 'Please enter a valid number.',
 
 

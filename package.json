@@ -8,10 +8,7 @@
     "dev": "WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
     "build": "WEBPACK_ENV=build webpack"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cezarlz/boss-validator.git"
-  },
+  "repository": "cezarlz/boss-validator",
   "keywords": [
     "js",
     "validator",
@@ -31,10 +28,6 @@
   ],
   "author": "Cezar Luiz",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cezarlz/boss/issues"
-  },
-  "homepage": "https://github.com/cezarlz/boss#readme",
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",

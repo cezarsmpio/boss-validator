@@ -68,6 +68,18 @@ let Boss = {
               }
 
               if (!validate.call(self, el, rule, rules)) {
+                if (r == 'between') {
+                  let transformation = '';
+
+                  for(let i = 0; i < rule.length ; i += 1) {
+                    transformation += rule[i].join(' and ');
+                    if (i != rule.length - 1) {
+                      transformation += ' or ';
+                    }
+                  }
+
+                  rule = transformation;
+                }
                 self.errors.push({
                   el,
                   rule: r,
