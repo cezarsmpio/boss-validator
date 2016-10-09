@@ -71,9 +71,9 @@ let Boss = {
                 if (r == 'between') {
                   let transformation = '';
 
-                  for(let i = 0; i < rule.length ; i += 1) {
+                  for(let i = 0, t = rule.length; i < t ; ++i) {
                     transformation += rule[i].join(' and ');
-                    if (i != rule.length - 1) {
+                    if (i != t - 1) {
                       transformation += ' or ';
                     }
                   }
