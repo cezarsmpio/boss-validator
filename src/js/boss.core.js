@@ -1,5 +1,5 @@
 let v = require('./boss.validators');
-let m = require('./boss.messages');
+let m = require('./languages/default');
 let f = require('./boss.filters');
 let formSerialize = require('form-serialize');
 
@@ -22,13 +22,13 @@ let Boss = {
     this.options = Object.assign({}, this.options, newOptions);
   },
 
-  configureMessages: function (msgs) {
+  loadLanguage: function (messages) {
     try {
-      if (this._typeof(msgs) !== 'object') {
-        throw new Error('configureMessages: Please, your messages needs to be an object of keys and values (string).');
+      if (this._typeof(messages) !== 'object') {
+        throw new Error('loadLanguage: Please, your messages needs to be an object of keys and values (string).');
       }
 
-      this.messages = Object.assign({}, this.messages, msgs);
+      this.messages = Object.assign({}, this.messages, messages);
     }
     catch (err) {
       console.error(err.getMessage());

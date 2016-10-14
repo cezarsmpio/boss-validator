@@ -1,3 +1,4 @@
+// Russian
 const messages = {
   default: 'Please fill in this field.',
   required: 'This field is required.',
@@ -7,13 +8,13 @@ const messages = {
   less_equal: 'The value needs to be less than or equal to {val}.',
   bigger: 'The value needs to be bigger than {val}.',
   bigger_equal: 'The value needs to be less than or equal to {val}.',
-  between: 'The value must be between {val}.',
+  between: 'The value must be between {val}',
   number: 'Please enter a valid number.',
 
 
   // Strings
   exact: 'Must contain the following characters: {val}',
-  extensions: 'Please upload a file with the following extensions: {val}.',
+  extensions: 'Please upload a filen de with the following extensions: {val}.',
   contains: 'Must contain the following value: {val}.',
   minlength: 'Must be at least {val} characters long.',
   maxlength: 'Must be less than {val} characters long.',
@@ -34,4 +35,4 @@ const messages = {
   alpha_numeric: 'No special characters allowed, just numbers and letters.',
 };
 
-module.exports = messages;
+export default messages;
