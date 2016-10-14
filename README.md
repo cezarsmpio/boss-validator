@@ -270,6 +270,24 @@ Boss.configureMessages({
 });
 ```
 
+### Boss.loadLanguage(language)
+
+You can create and override an idiom to another. `boss-validator` loads by default the language `en-US`, but if you need, we have others languages: German, Spanish, French, Italian, Japanese, Brazilian Portuguese, Russian and Chinese. Some of them need of translation, if you want to help, please contribute.
+
+```javascript
+import japanese from 'boss-validator/js/languages/ja';
+
+Boss.loadLanguage(japanese);
+
+// or
+
+import { it } from 'boss-validator/js/languages/all';
+
+Boss.loadLanguage(it);
+```
+
+The `loadLanguage` method is "async", that is, you can call anytime and the next validation will be using the new language. This method is an alias to `Boss.configureMessages`.
+
 ### Boss.addValidator(object)
 
 Power to create custom validators. Easy.

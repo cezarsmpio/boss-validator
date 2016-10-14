@@ -22,10 +22,10 @@ let Boss = {
     this.options = Object.assign({}, this.options, newOptions);
   },
 
-  loadLanguage: function (messages) {
+  configureMessages: function (messages) {
     try {
       if (this._typeof(messages) !== 'object') {
-        throw new Error('loadLanguage: Please, your messages needs to be an object of keys and values (string).');
+        throw new Error('configureMessages: Please, your messages needs to be an object of keys and values (string).');
       }
 
       this.messages = Object.assign({}, this.messages, messages);
@@ -33,6 +33,10 @@ let Boss = {
     catch (err) {
       console.error(err.getMessage());
     }
+  },
+
+  loadLanguage: function (language) {
+    return this.configureMessage(language);
   },
 
   addValidator: function (v) {

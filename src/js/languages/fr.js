@@ -35,4 +35,4 @@ const messages = {
   alpha_numeric: 'No special characters allowed, just numbers and letters.',
 };
 
-export default messages;
+module.exports = messages;
