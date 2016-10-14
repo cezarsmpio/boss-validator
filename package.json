@@ -1,6 +1,6 @@
 {
   "name": "boss-validator",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "The simplest library to validate data or forms.",
   "main": "dist/js/boss.min.js",
   "scripts": {
@@ -44,5 +44,8 @@
     "webpack-dev-server": "^1.15.1",
     "webpack-polyfill-service-plugin": "0.0.2",
     "webpack-polyfills-plugin": "0.0.9"
+  },
+  "dependencies": {
+    "form-serialize": "^0.7.1"
   }
 }

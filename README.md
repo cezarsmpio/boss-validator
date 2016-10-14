@@ -56,6 +56,7 @@
 * [Installation](#installation)
 * [Validators](#validators)
 * [Messages](#messages)
+* [Transforms](#transforms)
 * [Methods](#methods)
 * [TODO](#todo)
 * [Browser Support](#browser-support)
@@ -130,7 +131,7 @@ const messages = {
   less_equal: 'The value needs to be less than or equal to {val}.',
   bigger: 'The value needs to be bigger than {val}.',
   bigger_equal: 'The value needs to be less than or equal to {val}.',
-  between: 'The value must be between {val}.',
+  between: 'The value must be between {val}',
   number: 'Please enter a valid number.',
 
 
@@ -158,11 +159,44 @@ const messages = {
 };
 ```
 
+## Transforms
+
+Transforms are a way to change the data of your form or object. You can call it using the mehotd `transform` or passing a filter params when you use the `validate` method.
+
+It's simple, take a look:
+
+```javascript
+let transformedData = Boss.transform(yourData, {
+  name: ['trim', 'uppercase'], // array of filters
+  key: ['trim', 'base64_encode'],
+  html: ['html_escape']
+});
+
+// or...
+
+Boss.validate(yourData, rules, transforms)
+  .then(data => {
+    console.log(data.transformed); // Filtered data
+    console.log(data.source); // Original data
+  });
+```
+
+The transforms available are:
+
+* `trim`
+* `uppercase` and `lowercase`
+* `base64_encode` and `base64_decode`
+* `urlencode` and `urldecode`
+* `json_parse`
+* `slug`
+* `html_escape` and `html_unescape`
+
+
 ## Methods
 
-### Boss.validate(form, rules)
+### Boss.validate(form, rules [, transforms])
 
-### Boss.validate(object, rules)
+### Boss.validate(object, rules [, transforms])
 
 For each object in `object`, there must be a `value` property.
 
@@ -209,6 +243,10 @@ let rules = {
 
 Boss.validate(form, rules);
 ```
+
+### Boss.transform(data, transforms)
+
+Returns the filtered data.
 
 ### Boss.configure(object)
 
@@ -281,7 +319,8 @@ Why not to help?
 
 - [x] :rocket:
 - [x] Publish on `npm install -i boss-validator` and `bower install boss-validator`
-- [ ] Improve and review the messages
+- [x] Improve and review the messages
+- [x] Create filters
 - [ ] Create a easy way to extend I18n messages
 - [ ] Create unit tests !important
 - [ ] Create more useful validators
@@ -304,7 +343,6 @@ If you aren't sure about these features, please, use this smart polyfill:
 ```html
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Object.keys,Promise,String.prototype.endsWith,Element.prototype.classList,Object.assign"></script>
 ```
-
 
 ---
 

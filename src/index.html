@@ -44,8 +44,9 @@
 <body>
   <form action="" id="form">
     <div class="form-group"><input id="name" type="text" name="name" placeholder="Name" /></div>
+    <div class="form-group"><input id="lastname" type="text" name="lastname" placeholder="Lastname" /></div>
     <div class="form-group"><input type="number" name="age" placeholder="Age" /></div>
-
+    <div class="form-group"><input type="file" name="logo" /></div>
 
     <button>Send</button>
   </form>
@@ -114,14 +115,25 @@
     //   message: 'The value needs to be {val}'
     // });
 
+    let filters = {
+      name: ['trim', 'uppercase'],
+      lastname: ['slug', 'base64_encode']
+    };
+
+    let filteredData = Boss.transform(form, filters);
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var validate = Boss.validate(form, validations);
+      var validate = Boss.validate(form, validations, filters);
 
-      validate.catch(function (err) {
-        console.log(err);
-      });
+      validate
+        .then(data => {
+          console.log(data.transformed, data.source);
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
     });
   </script>
 </body>

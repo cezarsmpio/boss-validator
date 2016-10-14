@@ -1,5 +1,7 @@
-import v from './boss.validators';
-import m from './boss.messages';
+let v = require('./boss.validators');
+let m = require('./boss.messages');
+let f = require('./boss.filters');
+let formSerialize = require('form-serialize');
 
 let Boss = {
   // Private attr
@@ -38,74 +40,115 @@ let Boss = {
     this.messages[v.name] = v.message || false;
   },
 
-  validate: function (form, validations) {
-    var self = this;
-    self.form = form;
+  validate: function (data, validations, filters) {
+    let self = this;
+    let vals = Object.keys(validations);
+
+    self.data = data;
     self.errors = [];
 
-    return new Promise(function (resolve, reject) {
-      let vals = Object.keys(validations);
+    for (let i = 0, t = vals.length; i < t; i++) {
+      let name = vals[i];
+      let el = data[name];
 
-      for (let i = 0, t = vals.length; i < t; i++) {
-        let name = vals[i];
-        let el = form[name];
+      if (el) {
+        let rules = validations[name];
+        let rulesKeys = Object.keys(rules);
 
-        if (el) {
-          let rules = validations[name];
-          let rulesKeys = Object.keys(rules);
+        for (let j = 0, tt = rulesKeys.length; j < tt; j++) {
+          let r = rulesKeys[j];
 
-          for (let j = 0, tt = rulesKeys.length; j < tt; j++) {
-            let r = rulesKeys[j];
+          if ((rules.hasOwnProperty('required')) || el.value.length) {
+            let validate = self.validators[r];
+            let rule = rules[r];
+            let message = self.messages[r];
+            let messageValue;
 
-            if ((rules.hasOwnProperty('required')) || el.value.length) {
-              let validate = self.validators[r];
-              let rule = rules[r];
-              let message = self.messages[r];
-
-              if (self._typeof(rule) === 'object') {
-                message = rule.message;
-                value = rule.value;
-              }
-
-              if (!validate.call(self, el, rule, rules)) {
-                if (r == 'between') {
-                  let transformation = '';
-
-                  for(let i = 0, t = rule.length; i < t ; ++i) {
-                    transformation += rule[i].join(' and ');
-                    if (i != t - 1) {
-                      transformation += ' or ';
-                    }
-                  }
-
-                  rule = transformation;
-                }
-                self.errors.push({
-                  el,
-                  rule: r,
-                  value: rule,
-                  message: self._supplant(message || self.messages['default'], {
-                    val: rule.toString()
-                  })
-                });
-              }
+            if (self._typeof(rule) === 'object') {
+              message = rule.message;
+              rule = rule.value;
             }
-          } // end for
-        } // end if
-      } // end for
 
-      if (self._typeof(form) === 'htmlformelement' && self.options.appendErrors) {
-        self._appendErrors();
-      }
+            if (r == 'between') {
+              let transformation = '';
 
-      if (self.errors.length) return reject(self.errors);
+              for(let i = 0, t = rule.length; i < t ; ++i) {
+                transformation += rule[i].join(' and ');
+                if (i != t - 1) {
+                  transformation += ' or ';
+                }
+              }
 
-      return resolve();
-    });
+              messageValue = transformation;
+            }
+
+            if (!validate.call(self, el, rule, rules)) {
+              self.errors.push({
+                el,
+                rule: r,
+                value: rule,
+                message: self._supplant(message || self.messages['default'], {
+                  val: messageValue || rule.toString()
+                })
+              });
+            }
+          }
+        } // end for
+      } // end if
+    } // end for
+
+    if (self._typeof(data) === 'htmlformelement' && self.options.appendErrors) self._appendErrors();
+
+    if (self.errors.length) return Promise.reject(self.errors);
+
+    if (self._typeof(filters) === 'object') return Promise.resolve({ transformed: self._filter(data, filters), source: data });
+
+    return Promise.resolve({ source: data });
   },
 
   setErrorClass: function (className) {
     this._errorClassSpan = `${className} boss--error`;
+  },
+
+  transform: function (data, filters) {
+    return this._filter(data, filters);
+  },
+
+  _filter: function (data, filters) {
+    let dataType = this._typeof(data);
+    let dataKeys = Object.keys(data);
+    let filterType = this._typeof(filters);
+    let filterKeys = Object.keys(filters);
+    let filteredData = {};
+
+    if (!(dataType === 'htmlformelement' || dataType === 'object')) {
+      throw new Error('filter: Only HTML form element or object are allowed.');
+    }
+
+    if (filterType !== 'object') {
+      throw new Error('filter: The filter param must be an object.');
+    }
+
+    if (dataType === 'htmlformelement') {
+      data = formSerialize(data, { hash: true, empty: true });
+    }
+
+    for (let i = 0, t = filterKeys.length; i < t; i++) {
+      let name = filterKeys[i];
+      let field = data[name];
+
+      if (name in data) {
+        let fieldFilters = filters[name];
+
+        fieldFilters.forEach(v => {
+          if (f[v]) field = f[v](field);
+        });
+
+        filteredData[name] = field;
+      }
+    }
+
+    return Object.assign({}, data, filteredData);
   },
 
   // Private Methods
