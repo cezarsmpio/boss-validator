@@ -125,6 +125,10 @@ Each validator has a specific error message, so as to provide verbosity. Althoug
 const messages = {
   default: 'Please fill in this field.',
   required: 'This field is required.',
+  prepositions: {
+    and: ' and ',
+    or: ' or '
+  },
 
   // Numbers, Sizes
   less: 'The value needs to be less than {val}.',
@@ -353,10 +357,10 @@ Why not to help?
 - [x] Publish on `npm install -i boss-validator` and `bower install boss-validator`
 - [x] Improve and review the messages
 - [x] Create filters
-- [ ] Create a easy way to extend I18n messages
+- [x] Create a easy way to extend I18n messages
+- [x] Improve this documentation
 - [ ] Create unit tests !important
 - [ ] Create more useful validators
-- [ ] Improve this documentation
 - [ ] Create gh-pages branch
 - [ ] Create a logo
 
