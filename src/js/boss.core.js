@@ -86,14 +86,23 @@ let Boss = {
               messageValue = transformation;
             }
 
-            if (!validate.call(self, el, rule, rules)) {
+            if (self._typeof(validate) !== 'undefined') {
+              if (!validate.call(self, el, rule, rules)) {
+                self.errors.push({
+                  el,
+                  rule: r,
+                  value: rule,
+                  message: self._supplant(message || self.messages['default'], {
+                    val: messageValue || rule.toString()
+                  })
+                });
+              }
+            }
+            else {
               self.errors.push({
-                el,
                 rule: r,
                 value: rule,
-                message: self._supplant(message || self.messages['default'], {
-                  val: messageValue || rule.toString()
-                })
+                message: `The validator "${r}" doesn't exist. Please check its name.`
               });
             }
           }

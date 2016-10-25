@@ -4,7 +4,8 @@
   "description": "The simplest library to validate data or forms.",
   "main": "src/js/boss.core.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npm install -g browser-sync",
+    "test": "npm run build && browser-sync start --server './test' --serveStatic './dist' --files './test' --no-notify",
     "dev": "rm -rf ./dist && WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
     "build": "rm -rf ./dist && WEBPACK_ENV=build webpack"
   },
@@ -32,6 +33,7 @@
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
+    "browser-sync": "^2.17.5",
     "copy-webpack-plugin": "^3.0.1",
     "es6-promise": "^3.2.1",
     "eslint-loader": "^1.5.0",
