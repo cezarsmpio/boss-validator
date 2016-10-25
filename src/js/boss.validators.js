@@ -47,10 +47,10 @@ const validators = {
     return el.value.length == length;
   },
   minlength: function (el, length) {
-    return el.value.length > length;
+    return el.value.length >= length;
   },
   maxlength: function (el, length) {
-    return el.value.length < length;
+    return el.value.length <= length;
   },
   extensions: function (el, exts) {
     for (let i = 0, t = exts.length; i < t; ++i) {
