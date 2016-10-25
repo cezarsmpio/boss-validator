@@ -159,6 +159,20 @@ const messages = {
 };
 ```
 
+By the way, we have some pre-defined messages in other languages. The languages supported are:
+
+* English (Default)
+* German (Standard) - _Translation needed_
+* Spanish - _Translation needed_
+* French - _Translation needed_
+* Italian - _Translation needed_
+* Japanese - _Translation needed_
+* Brazilian Portuguese - _Translation needed_
+* Russian - _Translation needed_
+* Chinese - _Translation needed_
+
+**If you want to help us with the translations, please just open a PR :)**
+
 ## Transforms
 
 Transforms are a way to change the data of your form or object. You can call it using the mehotd `transform` or passing a filter params when you use the `validate` method.
@@ -286,7 +300,7 @@ import { it } from 'boss-validator/js/languages/all';
 Boss.loadLanguage(it);
 ```
 
-The `loadLanguage` method is "async", that is, you can call anytime and the next validation will be using the new language. This method is an alias to `Boss.configureMessages`.
+The `loadLanguage` method is "async", that is, you can call at anytime and the next validation will be using the new language. This method is an alias to `Boss.configureMessages`.
 
 ### Boss.addValidator(object)
 
