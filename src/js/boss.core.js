@@ -120,7 +120,6 @@ let Boss = {
 
   _filter: function (data, filters) {
     let dataType = this._typeof(data);
-    let dataKeys = Object.keys(data);
     let filterType = this._typeof(filters);
     let filterKeys = Object.keys(filters);
     let filteredData = {};
