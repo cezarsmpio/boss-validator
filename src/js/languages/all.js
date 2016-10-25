@@ -1,8 +1,8 @@
 module.exports = {
   default: require('./default'), // Default
-  enUS: require('./en-US'), // English US
-  ptBR: require('./pt-BR'), // Brazilian Portuguese
-  zhCN: require('./zh-CN'), // Chinese (Standard)
+  en_US: require('./en-US'), // English US
+  pt_BR: require('./pt-BR'), // Brazilian Portuguese
+  zh_CN: require('./zh-CN'), // Chinese (Standard)
   de: require('./de'), // German (Standard)
   es: require('./es'), // Spanish
   fr: require('./fr'), // French

@@ -7,11 +7,11 @@ const UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 module.exports = {
   context: path.join(__dirname, 'src'),
   entry: {
-    'boss.core': path.join(__dirname, 'src/js/boss.core.js')
+    'boss': path.join(__dirname, 'src/js/boss.core.js')
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'js/boss.min.js',
+    filename: 'js/[name].min.js',
     library: 'Boss',
     libraryTarget: 'umd',
     umdNamedDefine: true

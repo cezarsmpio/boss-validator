@@ -36,7 +36,7 @@ let Boss = {
   },
 
   loadLanguage: function (language) {
-    return this.configureMessage(language);
+    return this.configureMessages(language);
   },
 
   addValidator: function (v) {
@@ -77,9 +77,9 @@ let Boss = {
               let transformation = '';
 
               for(let i = 0, t = rule.length; i < t ; ++i) {
-                transformation += rule[i].join(' and ');
+                transformation += rule[i].join(m.prepositions.and);
                 if (i != t - 1) {
-                  transformation += ' or ';
+                  transformation += m.prepositions.or;
                 }
               }
 

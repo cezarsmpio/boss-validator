@@ -275,7 +275,7 @@ Boss.configureMessages({
 You can create and override an idiom to another. `boss-validator` loads by default the language `en-US`, but if you need, we have others languages: German, Spanish, French, Italian, Japanese, Brazilian Portuguese, Russian and Chinese. Some of them need of translation, if you want to help, please contribute.
 
 ```javascript
-import japanese from 'boss-validator/js/languages/ja';
+import { ja } from 'boss-validator/js/languages/all';
 
 Boss.loadLanguage(japanese);
 

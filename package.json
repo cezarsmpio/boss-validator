@@ -5,8 +5,8 @@
   "main": "src/js/boss.core.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
-    "build": "WEBPACK_ENV=build webpack"
+    "dev": "rm -rf ./dist && WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
+    "build": "rm -rf ./dist && WEBPACK_ENV=build webpack"
   },
   "repository": "cezarlz/boss-validator",
   "keywords": [

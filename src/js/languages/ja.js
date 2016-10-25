@@ -2,6 +2,10 @@
 const messages = {
   default: 'Please fill in this field.',
   required: 'This field is required.',
+  prepositions: {
+    and: ' and ',
+    or: ' or '
+  },
 
   // Numbers, Sizes
   less: 'The value needs to be less than {val}.',
@@ -34,5 +38,9 @@ const messages = {
   alpha: 'Only letters are allowed.',
   alpha_numeric: 'No special characters allowed, just numbers and letters.',
 };
+
+if ('Boss' in window) {
+  Boss.loadLanguage(messages);
+}
 
 module.exports = messages;
