@@ -1,12 +1,12 @@
 {
   "name": "boss-validator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The simplest library to validate data or forms.",
-  "main": "dist/js/boss.min.js",
+  "main": "src/js/boss.core.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
-    "build": "WEBPACK_ENV=build webpack"
+    "dev": "rm -rf ./dist && WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
+    "build": "rm -rf ./dist && WEBPACK_ENV=build webpack"
   },
   "repository": "cezarlz/boss-validator",
   "keywords": [

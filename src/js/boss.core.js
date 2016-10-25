@@ -1,5 +1,5 @@
 let v = require('./boss.validators');
-let m = require('./boss.messages');
+let m = require('./languages/default');
 let f = require('./boss.filters');
 let formSerialize = require('form-serialize');
 
@@ -22,17 +22,21 @@ let Boss = {
     this.options = Object.assign({}, this.options, newOptions);
   },
 
-  configureMessages: function (msgs) {
+  configureMessages: function (messages) {
     try {
-      if (this._typeof(msgs) !== 'object') {
+      if (this._typeof(messages) !== 'object') {
         throw new Error('configureMessages: Please, your messages needs to be an object of keys and values (string).');
       }
 
-      this.messages = Object.assign({}, this.messages, msgs);
+      this.messages = Object.assign({}, this.messages, messages);
     }
     catch (err) {
       console.error(err.getMessage());
     }
+  },
+
+  loadLanguage: function (language) {
+    return this.configureMessages(language);
   },
 
   addValidator: function (v) {
@@ -73,9 +77,9 @@ let Boss = {
               let transformation = '';
 
               for(let i = 0, t = rule.length; i < t ; ++i) {
-                transformation += rule[i].join(' and ');
+                transformation += rule[i].join(m.prepositions.and);
                 if (i != t - 1) {
-                  transformation += ' or ';
+                  transformation += m.prepositions.or;
                 }
               }
 
@@ -116,7 +120,6 @@ let Boss = {
 
   _filter: function (data, filters) {
     let dataType = this._typeof(data);
-    let dataKeys = Object.keys(data);
     let filterType = this._typeof(filters);
     let filterKeys = Object.keys(filters);
     let filteredData = {};

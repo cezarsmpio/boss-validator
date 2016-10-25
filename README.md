@@ -159,6 +159,20 @@ const messages = {
 };
 ```
 
+By the way, we have some pre-defined messages in other languages. The languages supported are:
+
+* English (Default)
+* German (Standard) - _Translation needed_
+* Spanish - _Translation needed_
+* French - _Translation needed_
+* Italian - _Translation needed_
+* Japanese - _Translation needed_
+* Brazilian Portuguese - _Translation needed_
+* Russian - _Translation needed_
+* Chinese - _Translation needed_
+
+**If you want to help us with the translations, please just open a PR :)**
+
 ## Transforms
 
 Transforms are a way to change the data of your form or object. You can call it using the mehotd `transform` or passing a filter params when you use the `validate` method.
@@ -269,6 +283,24 @@ Boss.configureMessages({
   my_custom_validator: 'Your name is not <strong>Gandalf</strong>.'
 });
 ```
+
+### Boss.loadLanguage(language)
+
+You can create and override an idiom to another. `boss-validator` loads by default the language `en-US`, but if you need, we have others languages: German, Spanish, French, Italian, Japanese, Brazilian Portuguese, Russian and Chinese. Some of them need of translation, if you want to help, please contribute.
+
+```javascript
+import { ja } from 'boss-validator/js/languages/all';
+
+Boss.loadLanguage(japanese);
+
+// or
+
+import { it } from 'boss-validator/js/languages/all';
+
+Boss.loadLanguage(it);
+```
+
+The `loadLanguage` method is "async", that is, you can call at anytime and the next validation will be using the new language. This method is an alias to `Boss.configureMessages`.
 
 ### Boss.addValidator(object)
 
