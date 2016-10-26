@@ -59,6 +59,11 @@ describe('Test validators', function () {
       done();
     });
 
+    it('Throw a TypeError if the name property is not a string', function (done) {
+      expect(() => { Boss.addValidator({ name: 3.14, validator: function () {} }) }).to.throw(TypeError);
+      done();
+    });
+
     it('Create a custom validator without errors using the method addValidator', function (done) {
       expect(Boss.addValidator({
         name: 'foo',
