@@ -1,5 +1,4 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
 const path = require('path');
 
 module.exports = {
@@ -48,7 +47,6 @@ module.exports = {
     ]
   },
   plugins: [
-    new DashboardPlugin({port: 8080}),
     new CopyWebpackPlugin([
       {
         from: '*.html'
