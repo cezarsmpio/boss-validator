@@ -48,8 +48,12 @@ let Boss = {
         throw new TypeError('addValidator: You need to pass a name and a validator function.');
       }
       else {
+        if (this._typeof(v.name) !== 'string') {
+          throw new TypeError('addValidator: The name property needs to be a string.');
+        }
+
         if (this._typeof(v.validator) !== 'function') {
-          throw new TypeError('addValidator: the validator property needs to be a function');
+          throw new TypeError('addValidator: The validator property needs to be a function');
         }
       }
     }
