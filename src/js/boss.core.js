@@ -40,6 +40,20 @@ let Boss = {
   },
 
   addValidator: function (v) {
+    if (this._typeof(v) !== 'object') {
+      throw new TypeError('addValidator: The param needs to be an object.');
+    }
+    else {
+      if (!('name' in v) && !('validator' in v)) {
+        throw new TypeError('addValidator: You need to pass a name and a validator function.');
+      }
+      else {
+        if (this._typeof(v.validator) !== 'function') {
+          throw new TypeError('addValidator: the validator property needs to be a function');
+        }
+      }
+    }
+
     this.validators[v.name] = v.validator.bind(this);
     this.messages[v.name] = v.message || false;
   },
