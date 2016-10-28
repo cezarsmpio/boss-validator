@@ -9,4 +9,5 @@ module.exports = {
   it: require('./it'), // Italian
   ja: require('./ja'), // Japanese
   ru: require('./ru'), // Russian
+  no: require('./no'), // Norwegian (Inclusive)
 };
