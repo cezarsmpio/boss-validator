@@ -1,6 +1,81 @@
 let Boss = require('../dist/js/boss.min');
 let expect = require('chai').expect;
 
+let mock = {
+  rules: {
+    required: true,
+    less: 10,
+    less_equal: 20,
+    bigger: 30,
+    bigger_equal: 30,
+    between: [[0, 10]],
+    exact: 10,
+    minlength: 5,
+    maxlength: 8,
+    starts: 'boss',
+    ends: 'validator',
+    contains: 'oss',
+    boolean: true,
+    email: true,
+    regex: /^[0-9]{1,5}$/,
+    https: true,
+    url: true,
+    credit_card: true,
+    ip_v4: true,
+    ip_v6: true,
+    alpha_numeric: true,
+    alpha: true
+  },
+  valid: {
+    required: 'Cezar Luiz Sampaio',
+    less: 5,
+    less_equal: 20,
+    bigger: 50,
+    bigger_equal: 30,
+    between: 5,
+    exact: 'abcdefghij',
+    minlength: 'abcde',
+    maxlength: 'hello',
+    starts: 'boss-validator',
+    ends: 'boss-validator',
+    contains: 'boss-validator',
+    boolean: true,
+    email: 'cezarluiz.c@gmail.com',
+    regex: '12345',
+    https: 'https://github.com',
+    url: 'http://github.com',
+    credit_card: '4111111111111111',
+    ip_v4: '192.168.0.1',
+    ip_v6: '2001:cdba:0000:0000:0000:0000:3257:9652',
+    alpha_numeric: '123abc',
+    alpha: 'ABCabc'
+  },
+  invalid: {
+    required: false,
+    less: 20,
+    less_equal: 25,
+    bigger: 10,
+    bigger_equal: 10,
+    between: 15,
+    exact: 'boss',
+    minlength: null,
+    maxlength: 'hello, wonderful world!',
+    starts: 'validator-boss',
+    ends: 'validator-boss',
+    contains: 'bozz-validator',
+    boolean: {},
+    email: 'cezarluiz.c',
+    regex: 'abcde',
+    https: 'http://github.com',
+    url: 'github.lol',
+    credit_card: '4111111111111112',
+    ip_v4: '300.0.0.1',
+    ip_v6: '127.0.0.1',
+    alpha_numeric: '!@#$%',
+    alpha: '123456789'
+  }
+};
+
 describe('Boss initial load', function () {
   before(function () {
     window.Boss = Boss;
@@ -13,11 +88,13 @@ describe('Boss initial load', function () {
 
 describe('Boss messages', function () {
   describe('Using configureMessages method', function () {
-    it('The required messages usiging configureMessages needs to equal "Este campo é obrigatório."', function (done) {
+    before(function () {
       Boss.configureMessages({
         required: 'Este campo é obrigatório.'
       });
+    });
 
+    it('The required messages usiging configureMessages needs to equal "Este campo é obrigatório."', function (done) {
       let fields = {
         name: { value: '' }
       };
@@ -65,13 +142,577 @@ describe('Test validators', function () {
     });
 
     it('Create a custom validator without errors using the method addValidator', function (done) {
-      expect(Boss.addValidator({
+      let validator = Boss.addValidator({
         name: 'foo',
         validator: function () {
           return true
         }
-      })).to.be.undefined;
+      });
+
+      expect(validator).to.be.undefined;
       done();
     });
+  });
+
+  describe('Validators', function () {
+    before(function () {
+      Boss.configureMessages({
+        required: 'This field is required.'
+      });
+    });
+
+    describe('Valid', function () {
+      it('required', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.required } },
+          { field: { required: mock.rules.required  }}
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.required);
+          done();
+        });
+      });
+
+      it('less', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.less } },
+          { field: { less: mock.rules.less  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.less);
+          done();
+        })
+      });
+
+      it('less_equal', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.less_equal } },
+          { field: { less_equal: mock.rules.less_equal  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.less_equal);
+          done();
+        })
+      });
+
+      it('bigger', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.bigger } },
+          { field: { bigger: mock.rules.bigger  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.bigger);
+          done();
+        })
+      });
+
+      it('bigger_equal', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.bigger_equal } },
+          { field: { bigger_equal: mock.rules.bigger_equal  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.bigger_equal);
+          done();
+        })
+      });
+
+      it('between', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.between } },
+          { field: { between: mock.rules.between  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.between);
+          done();
+        })
+      });
+
+      it('exact', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.exact } },
+          { field: { exact: mock.rules.exact  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.exact);
+          done();
+        })
+      });
+
+      it('minlength', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.minlength } },
+          { field: { minlength: mock.rules.minlength  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.minlength);
+          done();
+        })
+      });
+
+      it('maxlength', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.maxlength } },
+          { field: { maxlength: mock.rules.maxlength  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.maxlength);
+          done();
+        })
+      });
+
+      it('starts', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.starts } },
+          { field: { starts: mock.rules.starts  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.starts);
+          done();
+        })
+      });
+
+      it('ends', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.ends } },
+          { field: { ends: mock.rules.ends  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.ends);
+          done();
+        })
+      });
+
+      it('contains', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.contains } },
+          { field: { contains: mock.rules.contains  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.contains);
+          done();
+        })
+      });
+
+      it('boolean', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.boolean } },
+          { field: { boolean: mock.rules.boolean  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.boolean);
+          done();
+        })
+      });
+
+      it('email', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.email } },
+          { field: { email: mock.rules.email  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.email);
+          done();
+        })
+      });
+
+      it('regex', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.regex } },
+          { field: { regex: mock.rules.regex  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.regex);
+          done();
+        })
+      });
+
+      it('url', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.url } },
+          { field: { url: mock.rules.url  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.url);
+          done();
+        })
+      });
+
+      it('https', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.https } },
+          { field: { https: mock.rules.https  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.https);
+          done();
+        })
+      });
+
+      it('credit_card', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.credit_card } },
+          { field: { credit_card: mock.rules.credit_card  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.credit_card);
+          done();
+        })
+      });
+
+      it('ip_v4', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.ip_v4 } },
+          { field: { ip_v4: mock.rules.ip_v4  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.ip_v4);
+          done();
+        })
+      });
+
+      it('ip_v6', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.ip_v6 } },
+          { field: { ip_v6: mock.rules.ip_v6  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.ip_v6);
+          done();
+        })
+      });
+
+      it('alpha_numeric', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.alpha_numeric } },
+          { field: { alpha_numeric: mock.rules.alpha_numeric  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.alpha_numeric);
+          done();
+        })
+      });
+
+      it('alpha', function (done) {
+        Boss.validate(
+          { field: { value: mock.valid.alpha } },
+          { field: { alpha: mock.rules.alpha  } }
+        ).then((res) => {
+          expect(res.source.field.value).to.equal(mock.valid.alpha);
+          done();
+        })
+      });
+    })
+    describe('Invalid', function () {
+      it('required', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.required } },
+          { field: { required: mock.rules.required  }}
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        });
+      });
+
+      it('less', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.less } },
+          { field: { less: mock.rules.less  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('less_equal', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.less_equal } },
+          { field: { less_equal: mock.rules.less_equal  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('bigger', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.bigger } },
+          { field: { bigger: mock.rules.bigger  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('bigger_equal', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.bigger_equal } },
+          { field: { bigger_equal: mock.rules.bigger_equal  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('between', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.between } },
+          { field: { between: mock.rules.between  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('exact', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.exact } },
+          { field: { exact: mock.rules.exact  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('minlength', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.minlength } },
+          { field: { minlength: mock.rules.minlength  } }
+        )
+        .catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        });
+      });
+
+      it('maxlength', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.maxlength } },
+          { field: { maxlength: mock.rules.maxlength  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('starts', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.starts } },
+          { field: { starts: mock.rules.starts  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('ends', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.ends } },
+          { field: { ends: mock.rules.ends  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('contains', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.contains } },
+          { field: { contains: mock.rules.contains  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('boolean', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.boolean } },
+          { field: { boolean: mock.rules.boolean  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('email', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.email } },
+          { field: { email: mock.rules.email  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('regex', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.regex } },
+          { field: { regex: mock.rules.regex  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('url', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.url } },
+          { field: { url: mock.rules.url  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('https', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.https } },
+          { field: { https: mock.rules.https  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('credit_card', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.credit_card } },
+          { field: { credit_card: mock.rules.credit_card  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('ip_v4', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.ip_v4 } },
+          { field: { ip_v4: mock.rules.ip_v4  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('ip_v6', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.ip_v6 } },
+          { field: { ip_v6: mock.rules.ip_v6  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('alpha_numeric', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.alpha_numeric } },
+          { field: { alpha_numeric: mock.rules.alpha_numeric  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+
+      it('alpha', function (done) {
+        Boss.validate(
+          { field: { value: mock.invalid.alpha } },
+          { field: { alpha: mock.rules.alpha  } }
+        ).catch((err) => {
+          let o = err.shift();
+
+          expect(o).to.have.property('message');
+          expect(o).to.have.property('rule');
+          expect(o).to.have.property('value');
+          expect(o).to.have.property('el');
+          done();
+        })
+      });
+    })
   });
 });
