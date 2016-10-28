@@ -2,7 +2,9 @@ const validators = {
   required: function (el) {
     return 'type' in el && (el.type === 'checkbox' || el.type === 'radio') ?
             el.checked :
-            el.value.length;
+            (typeof el.value === 'string')
+              ? !!el.value.length
+              : false;
   },
 
   // Numbers, Sizes
@@ -10,16 +12,16 @@ const validators = {
     return el.value.match(/^[0-9]+$/g);
   },
   less: function (el, value) {
-    return parseFloat(el.value) < value;
+    return !!parseFloat(el.value) ? parseFloat(el.value) < value : false;
   },
   bigger: function (el, value) {
-    return parseFloat(el.value) > value;
+    return !!parseFloat(el.value) ? parseFloat(el.value) > value : false;
   },
   less_equal: function (el, value) {
-    return parseFloat(el.value) <= value;
+    return !!parseFloat(el.value) ? parseFloat(el.value) <= value : false;
   },
   bigger_equal: function (el, value) {
-    return parseFloat(el.value) >= value;
+    return !!parseFloat(el.value) ? parseFloat(el.value) >= value : false;
   },
   between: function (el, value) {
     if (this._typeof(value) === 'array') {
@@ -44,12 +46,18 @@ const validators = {
 
   // Strings
   exact: function (el, length) {
+    if (typeof el.value !== 'string') return false;
+
     return el.value.length == length;
   },
   minlength: function (el, length) {
+    if (typeof el.value !== 'string') return false;
+
     return el.value.length >= length;
   },
   maxlength: function (el, length) {
+    if (typeof el.value !== 'string') return false;
+
     return el.value.length <= length;
   },
   extensions: function (el, exts) {
@@ -71,7 +79,9 @@ const validators = {
 
   // Booleans
   boolean: function (el) {
-    return el.value === 'true' || el.value === 'false';
+    let bool = String(el.value);
+
+    return bool === 'true' || bool === 'false';
   },
 
   // Regex
@@ -91,10 +101,14 @@ const validators = {
 
     return el.value.match(regex) !== null;
   },
-  credit_card: function (el) {
-    let ccRegex = /^3(?:[47]\d([ -]?)\d{4}(?:\1\d{4}){2}|0[0-5]\d{11}|[68]\d{12})$|^4(?:\d\d\d)?([ -]?)\d{4}(?:\2\d{4}){2}$|^6011([ -]?)\d{4}(?:\3\d{4}){2}$|^5[1-5]\d\d([ -]?)\d{4}(?:\4\d{4}){2}$|^2014\d{11}$|^2149\d{11}$|^2131\d{11}$|^1800\d{11}$|^3\d{15}$/;
+  credit_card: function(el) {
+    /* jshint expr: true */
+    let cardNumber = String(el.value);
+    let b,c,d,e;
 
-    return el.value.match(ccRegex) !== null;
+    for(d = +cardNumber[b = cardNumber.length-1], e=0; b--;)
+      c = +cardNumber[b], d += ++e % 2 ? 2 * c % 10 + (c > 4) : c;
+    return (d%10) === 0;
   },
   ip_v4: function (el) {
     let ipRegex = /^(?:(?:1\d{0,2}|[3-9]\d?|2(?:[0-5]{1,2}|\d)?|0)\.){3}(?:1\d{0,2}|[3-9]\d?|2(?:[0-5]{1,2}|\d)?|0)$/;

@@ -80,49 +80,47 @@ let Boss = {
         for (let j = 0, tt = rulesKeys.length; j < tt; j++) {
           let r = rulesKeys[j];
 
-          if ((rules.hasOwnProperty('required')) || el.value.length) {
-            let validate = self.validators[r];
-            let rule = rules[r];
-            let message = self.messages[r];
-            let messageValue;
+          let validate = self.validators[r];
+          let rule = rules[r];
+          let message = self.messages[r];
+          let messageValue;
 
-            if (self._typeof(rule) === 'object') {
-              message = rule.message;
-              rule = rule.value;
-            }
+          if (self._typeof(rule) === 'object') {
+            message = rule.message;
+            rule = rule.value;
+          }
 
-            if (r == 'between') {
-              let transformation = '';
+          if (r == 'between') {
+            let transformation = '';
 
-              for(let i = 0, t = rule.length; i < t ; ++i) {
-                transformation += rule[i].join(m.prepositions.and);
-                if (i != t - 1) {
-                  transformation += m.prepositions.or;
-                }
-              }
-
-              messageValue = transformation;
-            }
-
-            if (self._typeof(validate) !== 'undefined') {
-              if (!validate.call(self, el, rule, rules)) {
-                self.errors.push({
-                  el,
-                  rule: r,
-                  value: rule,
-                  message: self._supplant(message || self.messages['default'], {
-                    val: messageValue || rule.toString()
-                  })
-                });
+            for(let i = 0, t = rule.length; i < t ; ++i) {
+              transformation += rule[i].join(m.prepositions.and);
+              if (i != t - 1) {
+                transformation += m.prepositions.or;
               }
             }
-            else {
+
+            messageValue = transformation;
+          }
+
+          if (self._typeof(validate) !== 'undefined') {
+            if (!validate.call(self, el, rule, rules)) {
               self.errors.push({
+                el,
                 rule: r,
                 value: rule,
-                message: `The validator "${r}" doesn't exist. Please check its name.`
+                message: self._supplant(message || self.messages['default'], {
+                  val: messageValue || rule.toString()
+                })
               });
             }
+          }
+          else {
+            self.errors.push({
+              rule: r,
+              value: rule,
+              message: `The validator "${r}" doesn't exist. Please check its name.`
+            });
           }
         } // end for
       } // end if
