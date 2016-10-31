@@ -1,3 +1,4 @@
+![Boss Validator](logo/logo.png?raw=true)
 # boss-validator
 
 > The simplest library to validate data or forms.
