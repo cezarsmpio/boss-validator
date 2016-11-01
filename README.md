@@ -175,6 +175,7 @@ By the way, we have some pre-defined messages in other languages. The languages 
 * Russian - _Translation needed_
 * Chinese - _Translation needed_
 * Ukrainian - _Finished_
+* Norwegian (Bokmål) - _Finished_
 
 **If you want to help us with the translations, please just open a PR :)**
 
