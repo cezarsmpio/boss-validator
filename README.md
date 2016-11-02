@@ -362,7 +362,7 @@ Why not to help?
 - [x] Create filters
 - [x] Create a easy way to extend I18n messages
 - [x] Improve this documentation
-- [ ] Create unit tests !important
+- [x] Create unit tests !important
 - [ ] Create more useful validators
 - [ ] Create gh-pages branch
 - [ ] Create a logo
