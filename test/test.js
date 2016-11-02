@@ -112,7 +112,7 @@ describe('Boss messages', function () {
   })
 });
 
-describe('Test validators', function () {
+describe('Test validators and transforms', function () {
   describe('Create custom validators', function () {
     it('Throw a TypeError if addValidator param is not a object', function (done) {
       expect(() => { Boss.addValidator('foo') }).to.throw(TypeError);
@@ -161,7 +161,7 @@ describe('Test validators', function () {
       });
     });
 
-    describe('Valid', function () {
+    describe('Valid and correct values', function () {
       it('required', function (done) {
         Boss.validate(
           { field: { value: mock.valid.required } },
@@ -382,7 +382,7 @@ describe('Test validators', function () {
         })
       });
     })
-    describe('Invalid', function () {
+    describe('Invalid values', function () {
       it('required', function (done) {
         Boss.validate(
           { field: { value: mock.invalid.required } },
@@ -715,4 +715,110 @@ describe('Test validators', function () {
       });
     })
   });
+
+  describe('Transforms', function () {
+    let mock = {
+      trim: { value: '   boss   ' },
+      uppercase: { value: 'boss' },
+      lowercase: { value: 'BOSS' },
+      baseEncode: { value: 'boss' },
+      baseDecode: { value: 'Ym9zcw==' },
+      urlEncode: { value: 'https://google.com.br?q=boss validator is the best lib ever' },
+      urlDecode: { value: 'https://google.com.br?q=boss%20validator%20is%20the%20best%20lib%20ever' },
+      jsonParse: { value: '{"id": 1}' },
+      slug: { value: '-BOSS validatoR iS - tHe BEST & ever áíóéñúç-' },
+      escape: { value: '<h1>Boss Validator</h1>' },
+      unescape: { value: '&lt;h1&gt;Boss Validator&lt;/h1&gt;' }
+    };
+
+    it('trim must return "boss" not "   boss   "', function () {
+      let transform = Boss.transform(mock, {
+        trim: ['trim']
+      });
+
+      expect(transform.trim.value).to.equal('boss');
+    });
+
+    it('uppercase must return "BOSS" not "boss"', function () {
+      let transform = Boss.transform(mock, {
+        uppercase: ['uppercase']
+      });
+
+      expect(transform.uppercase.value).to.equal('BOSS');
+    });
+
+    it('lowercase must return "boss" not "BOSS"', function () {
+      let transform = Boss.transform(mock, {
+        lowercase: ['lowercase']
+      });
+
+      expect(transform.lowercase.value).to.equal('boss');
+    });
+
+    it('base64_encode must return "Ym9zcw==" not "boss"', function () {
+      let transform = Boss.transform(mock, {
+        baseEncode: ['base64_encode']
+      });
+
+      expect(transform.baseEncode.value).to.equal('Ym9zcw==');
+    });
+
+    it('base64_decode must return "boss" not "Ym9zcw=="', function () {
+      let transform = Boss.transform(mock, {
+        baseDecode: ['base64_decode']
+      });
+
+      expect(transform.baseDecode.value).to.equal('boss');
+    });
+
+    it('urlencode must return a valid URL encoded', function () {
+      let transform = Boss.transform(mock, {
+        urlEncode: ['urlencode']
+      });
+
+      expect(transform.urlEncode.value).to.equal('https://google.com.br?q=boss%20validator%20is%20the%20best%20lib%20ever');
+    });
+
+    it('urldecode must return a valid URL decoded with spaces', function () {
+      let transform = Boss.transform(mock, {
+        urlDecode: ['urldecode']
+      });
+
+      expect(transform.urlDecode.value).to.equal('https://google.com.br?q=boss validator is the best lib ever');
+    });
+
+    it('json_parse must be a valid object and property "id" must to equal "1"', function () {
+      let transform = Boss.transform(mock, {
+        jsonParse: ['json_parse']
+      });
+
+      expect(transform.jsonParse.value).to.be.an('object');
+      expect(transform.jsonParse.value).to.have.property('id');
+      expect(transform.jsonParse.value).to.deep.equal({ id: 1 });
+    });
+
+    it('slug needs to remove the accents and put "-" between the spaces', function () {
+      let transform = Boss.transform(mock, {
+        slug: ['slug']
+      });
+
+      expect(transform.slug.value).to.equal('boss-validator-is-the-best-and-ever-aioenuc');
+    });
+
+    it('html_escape needs to be escaped replacing html chars', function () {
+      let transform = Boss.transform(mock, {
+        escape: ['html_escape']
+      });
+
+      expect(transform.escape.value).to.equal('&lt;h1&gt;Boss Validator&lt;/h1&gt;');
+    });
+
+    it('html_unescape needs to convert to a valid html', function () {
+      let transform = Boss.transform(mock, {
+        unescape: ['html_unescape']
+      });
+
+      expect(transform.unescape.value).to.equal('<h1>Boss Validator</h1>');
+    });
+  })
 });
