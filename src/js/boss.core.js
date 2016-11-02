@@ -169,7 +169,7 @@ let Boss = {
         let fieldFilters = filters[name];
 
         fieldFilters.forEach(v => {
-          if (f[v]) field = f[v](field);
+          if (f[v]) field.value = f[v](field.value);
         });
 
         filteredData[name] = field;

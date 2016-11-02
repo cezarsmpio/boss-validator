@@ -1,12 +1,12 @@
 const filters = {
   trim: function (value) {
-    return typeof value === 'string' ? value.trim() : value;
+    return (typeof value === 'string') ? value.trim() : value;
   },
   uppercase: function (value) {
-    return typeof value === 'string' ? value.toUpperCase() : value;
+    return (typeof value === 'string') ? value.toUpperCase() : value;
   },
   lowercase: function (value) {
-    return typeof value === 'string' ? value.toLowerCase() : value;
+    return (typeof value === 'string') ? value.toLowerCase() : value;
   },
   base64_encode: function (value) {
     return btoa(value);
@@ -28,11 +28,24 @@ const filters = {
   },
   slug: function (text) {
     // Thansk to https://gist.github.com/mathewbyrne/1280286
-    return text.toString().toLowerCase().trim()
-                  .replace(/\s+/g, '-')           // Replace spaces with -
-                  .replace(/&/g, '-and-')         // Replace & with 'and'
-                  .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-                  .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+    let slug = text
+      .toString()
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, '-')           // Replace spaces with -
+      .replace(/&/g, '-and-')         // Replace & with 'and'
+      .replace(/\-\-+/g, '-')        // Replace multiple - with single -
+      .replace(/^-+/, '')
+      .replace(/-+$/, '');
+
+    let from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    let to   = "aaaaeeeeiiiioooouuuunc------";
+
+    for (let i=0, l=from.length ; i<l ; i++) {
+      slug = slug.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    return slug;
   },
   html_escape: function (html) {
     return html
