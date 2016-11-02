@@ -5,7 +5,7 @@
   "main": "src/js/boss.core.js",
   "scripts": {
     "test": "npm run build && mocha",
-    "dev": "rm -rf ./dist && WEBPACK_ENV=dev webpack-dashboard -- webpack-dev-server --config ./webpack.dev.js",
+    "dev": "rm -rf ./dist && WEBPACK_ENV=dev webpack-dev-server --config ./webpack.dev.js",
     "build": "rm -rf ./dist && WEBPACK_ENV=build webpack"
   },
   "repository": "cezarlz/boss-validator",
