@@ -1,3 +1,5 @@
+/*jshint loopfunc: true */
+
 let v = require('./boss.validators');
 let m = require('./languages/default');
 let f = require('./boss.filters');
@@ -144,8 +146,9 @@ let Boss = {
   },
 
   _filter: function (data, filters) {
-    let dataType = this._typeof(data);
-    let filterType = this._typeof(filters);
+    let self = this;
+    let dataType = self._typeof(data);
+    let filterType = self._typeof(filters);
     let filterKeys = Object.keys(filters);
     let filteredData = {};
 
@@ -169,7 +172,12 @@ let Boss = {
         let fieldFilters = filters[name];
 
         fieldFilters.forEach(v => {
-          if (f[v]) field.value = f[v](field.value);
+          if (self._typeof(field) !== 'string' && 'value' in field) {
+            if (f[v]) field.value = f[v](field.value);
+          }
+          else {
+            if (f[v]) field = f[v](field);
+          }
         });
 
         filteredData[name] = field;

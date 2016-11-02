@@ -110,6 +110,10 @@ describe('Boss messages', function () {
         });
     });
   })
+
+  describe('Languages', function () {
+    // TODO: Create tests to validate the load language
+  });
 });
 
 describe('Test validators and transforms', function () {
