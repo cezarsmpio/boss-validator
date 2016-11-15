@@ -1,3 +1,5 @@
+/*jshint loopfunc: true */
+
 let v = require('./boss.validators');
 let m = require('./languages/default');
 let f = require('./boss.filters');
@@ -40,6 +42,24 @@ let Boss = {
   },
 
   addValidator: function (v) {
+    if (this._typeof(v) !== 'object') {
+      throw new TypeError('addValidator: The param needs to be an object.');
+    }
+    else {
+      if (!('name' in v) && !('validator' in v)) {
+        throw new TypeError('addValidator: You need to pass a name and a validator function.');
+      }
+      else {
+        if (this._typeof(v.name) !== 'string') {
+          throw new TypeError('addValidator: The name property needs to be a string.');
+        }
+
+        if (this._typeof(v.validator) !== 'function') {
+          throw new TypeError('addValidator: The validator property needs to be a function');
+        }
+      }
+    }
+
     this.validators[v.name] = v.validator.bind(this);
     this.messages[v.name] = v.message || false;
   },
@@ -62,30 +82,30 @@ let Boss = {
         for (let j = 0, tt = rulesKeys.length; j < tt; j++) {
           let r = rulesKeys[j];
 
-          if ((rules.hasOwnProperty('required')) || el.value.length) {
-            let validate = self.validators[r];
-            let rule = rules[r];
-            let message = self.messages[r];
-            let messageValue;
+          let validate = self.validators[r];
+          let rule = rules[r];
+          let message = self.messages[r];
+          let messageValue;
 
-            if (self._typeof(rule) === 'object') {
-              message = rule.message;
-              rule = rule.value;
-            }
+          if (self._typeof(rule) === 'object') {
+            message = rule.message;
+            rule = rule.value;
+          }
 
-            if (r == 'between') {
-              let transformation = '';
+          if (r == 'between') {
+            let transformation = '';
 
-              for(let i = 0, t = rule.length; i < t ; ++i) {
-                transformation += rule[i].join(m.prepositions.and);
-                if (i != t - 1) {
-                  transformation += m.prepositions.or;
-                }
+            for(let i = 0, t = rule.length; i < t ; ++i) {
+              transformation += rule[i].join(m.prepositions.and);
+              if (i != t - 1) {
+                transformation += m.prepositions.or;
               }
-
-              messageValue = transformation;
             }
 
+            messageValue = transformation;
+          }
+
+          if (self._typeof(validate) !== 'undefined') {
             if (!validate.call(self, el, rule, rules)) {
               self.errors.push({
                 el,
@@ -96,6 +116,13 @@ let Boss = {
                 })
               });
             }
+          }
+          else {
+            self.errors.push({
+              rule: r,
+              value: rule,
+              message: `The validator "${r}" doesn't exist. Please check its name.`
+            });
           }
         } // end for
       } // end if
@@ -119,8 +146,9 @@ let Boss = {
   },
 
   _filter: function (data, filters) {
-    let dataType = this._typeof(data);
-    let filterType = this._typeof(filters);
+    let self = this;
+    let dataType = self._typeof(data);
+    let filterType = self._typeof(filters);
     let filterKeys = Object.keys(filters);
     let filteredData = {};
 
@@ -144,7 +172,12 @@ let Boss = {
         let fieldFilters = filters[name];
 
         fieldFilters.forEach(v => {
-          if (f[v]) field = f[v](field);
+          if (self._typeof(field) !== 'string' && 'value' in field) {
+            if (f[v]) field.value = f[v](field.value);
+          }
+          else {
+            if (f[v]) field = f[v](field);
+          }
         });
 
         filteredData[name] = field;
