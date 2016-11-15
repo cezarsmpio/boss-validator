@@ -1,4 +1,5 @@
 ![Boss Validator](logo/logo-horizontal.png?raw=true)
+
 # boss-validator
 
 > The simplest library to validate data or forms.
@@ -61,6 +62,7 @@
 * [Messages](#messages)
 * [Transforms](#transforms)
 * [Methods](#methods)
+* [Tests](#tests)
 * [TODO](#todo)
 * [Browser Support](#browser-support)
 
@@ -354,6 +356,10 @@ Boss.validate(form, {
 Boss.setErrorClass('error__field');
 ```
 
+## Tests
+
+To run the tests, execute `npm install && npm run test`
+
 ## TODO
 
 Why not to help?
@@ -365,9 +371,9 @@ Why not to help?
 - [x] Create a easy way to extend I18n messages
 - [x] Improve this documentation
 - [x] Create unit tests !important
+- [x] Create a logo
 - [ ] Create more useful validators
 - [ ] Create gh-pages branch
-- [ ] Create a logo
 
 ## Browser Support
 
