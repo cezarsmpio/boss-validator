@@ -2,6 +2,8 @@
 
 > The simplest library to validate data or forms.
 
+[![NPM](https://nodei.co/npm/boss-validator.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/boss-validator/)
+
 ```html
 <form id="contact">
   <input type="text" name="fullname" placeholder="Your full name" />
