@@ -74,12 +74,13 @@ let Boss = {
     for (let i = 0, t = vals.length; i < t; i++) {
       let name = vals[i];
       let el = data[name];
+      let elType = self._typeof(el);
 
-      if (el) {
+      if (elType === 'string' || elType === 'object') {
         let rules = validations[name];
         let rulesKeys = Object.keys(rules);
 
-        if (self._typeof(el) !== 'object' && !el.hasOwnProperty('value')) {
+        if (elType === 'string' || !el.hasOwnProperty('value')) {
           el = {
             value: el
           };
@@ -118,6 +119,7 @@ let Boss = {
                 data: el.value,
                 rule: r,
                 value: rule,
+                name: name,
                 message: self._supplant(message || self.messages['default'], {
                   val: messageValue || rule.toString()
                 })
