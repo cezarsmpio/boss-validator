@@ -62,6 +62,7 @@
 * [Messages](#messages)
 * [Transforms](#transforms)
 * [Methods](#methods)
+* [ExpressJS](#expressjs)
 * [Tests](#tests)
 * [TODO](#todo)
 * [Browser Support](#browser-support)
@@ -223,13 +224,17 @@ The transforms available are:
 
 ### Boss.validate(object, rules [, transforms])
 
-For each object in `object`, there must be a `value` property.
+The property `value` is optional. Both works.
 
 ```javascript
 let fields = {
   ip: {
     value: '192.168.0.1'
   }
+};
+// or
+let fields = {
+  ip: '192.168.0.1'
 };
 
 let rules = {
@@ -354,6 +359,43 @@ Boss.validate(form, {
 
 ```javascript
 Boss.setErrorClass('error__field');
+```
+
+## ExpressJS
+
+If you want to integrate with NodeJS and ExpressJS, you need to use the module `body-parser`.
+
+The `Boss.validate` returns a promise, that is, we can use `async/await`.
+
+```pug
+form(action="/install" method="post")
+  input(name="database_name" type="text" value="node-commerce" placeholder="Database Name")
+  input(name="database_username" type="text" placeholder="Username")
+  input(name="database_password" type="password" placeholder="Password")
+  input(name="database_port" type="text" value="27017" placeholder="Database Port")
+
+  button(type="submit") Save
+```
+
+```javascript
+router.get('/install', (req, res) => {
+  res.render('admin/install');
+});
+
+router.post('/install', async (req, res) => {
+  try {
+    var data = await boss.validate(req.body, {
+      database_name: { required: true, email: true },
+      database_username: { required: true },
+      database_password: { required: true },
+      database_port: { required: true }
+    });
+
+    res.send(data);
+  } catch (e) {
+    res.send(e);
+  }
+});
 ```
 
 ## Tests
