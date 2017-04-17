@@ -79,6 +79,12 @@ let Boss = {
         let rules = validations[name];
         let rulesKeys = Object.keys(rules);
 
+        if (self._typeof(el) !== 'object' && !el.hasOwnProperty('value')) {
+          el = {
+            value: el
+          };
+        }
+
         for (let j = 0, tt = rulesKeys.length; j < tt; j++) {
           let r = rulesKeys[j];
 
@@ -109,6 +115,7 @@ let Boss = {
             if (!validate.call(self, el, rule, rules)) {
               self.errors.push({
                 el,
+                data: el.value,
                 rule: r,
                 value: rule,
                 message: self._supplant(message || self.messages['default'], {
