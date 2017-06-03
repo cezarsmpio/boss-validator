@@ -1,42 +1,42 @@
 // Russian
 const messages = {
-  default: 'Please fill in this field.',
-  required: 'This field is required.',
+  default: 'Пожалуйста, заполните это поле.',
+  required: 'Поле обязательно для заполнения.',
   prepositions: {
-    and: ' and ',
-    or: ' or '
+    and: ' и ',
+    or: ' или '
   },
 
   // Numbers, Sizes
-  less: 'The value needs to be less than {val}.',
-  less_equal: 'The value needs to be less than or equal to {val}.',
-  bigger: 'The value needs to be bigger than {val}.',
-  bigger_equal: 'The value needs to be less than or equal to {val}.',
-  between: 'The value must be between {val}',
-  number: 'Please enter a valid number.',
+  less: 'Значение должно быть меньше, чем {val}.',
+  less_equal: 'Значение должно быть меньше или равно {val}.',
+  bigger: 'Значение должно быть больше, чем {val}.',
+  bigger_equal: 'Значение должно быть больше или равно {val}.',
+  between: 'Значение должно быть в промежутке {val}',
+  number: 'Пожалуйста, введите цифру.',
 
 
   // Strings
-  exact: 'Must contain the following characters: {val}',
-  extensions: 'Please upload a filen de with the following extensions: {val}.',
-  contains: 'Must contain the following value: {val}.',
-  minlength: 'Must be at least {val} characters long.',
-  maxlength: 'Must be less than {val} characters long.',
-  starts: 'This field should start with "{val}".',
-  ends: 'This field should end with "{val}".',
+  exact: 'Должно содержать символы: {val}',
+  extensions: 'Файл должен быть с одним из расширений: {val}.',
+  contains: 'Должно содержать текст: {val}.',
+  minlength: 'Длина должна быть не меньше {val} символов.',
+  maxlength: 'Длина должна быть не больше {val} символов.',
+  starts: 'Должно начинаться с "{val}".',
+  ends: 'Должно заканчиваться на "{val}".',
 
   // Booleans
-  boolean: 'This field needs to be "true" or "false".',
+  boolean: 'Поле должно быть "да" или "нет".',
 
   // Regex
-  email: 'Please provide a valid email address. (ex: user@gmail.com)',
-  url: 'Please provide a valid URL address with http:// or https://',
-  https: 'Your URL must start with https://',
-  credit_card: 'Please enter a valid credit card number.',
-  ip_v4: 'Please enter a valid IPV4 address. (ex: 172.16.254.1)',
-  ip_v6: 'Please enter a valid IPV6 address. (ex: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
-  alpha: 'Only letters are allowed.',
-  alpha_numeric: 'No special characters allowed, just numbers and letters.',
+  email: 'Пожалуйста, введите правильную электронную почту. (пример: user@gmail.com)',
+  url: 'Пожалуйста, введите правильный адрес с http:// или https://',
+  https: 'Адрес должен начинаться с https://',
+  credit_card: 'Пожалуйста, введите правильный номер кредитной карты.',
+  ip_v4: 'Пожалуйста, введите правильный IPV4 адрес. (пример: 172.16.254.1)',
+  ip_v6: 'Пожалуйста, введите правильный IPV6 адрес. (пример: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
+  alpha: 'Можно вводить только буквы.',
+  alpha_numeric: 'Можно вводить только буквы и цифры. Специальные симфолы запрещены.',
 };
 
 module.exports = messages;
