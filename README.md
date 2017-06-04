@@ -178,7 +178,7 @@ By the way, we have some pre-defined messages in other languages. The languages 
 * Italian - _Translation needed_
 * Japanese - _Translation needed_
 * Brazilian Portuguese - _Translation needed_
-* Russian - _Translation needed_
+* Russian - _Finished_
 * Chinese - _Translation needed_
 * Ukrainian - _Finished_
 * Norwegian (Bokmål) - _Finished_
