@@ -2,9 +2,7 @@ const validators = {
   required: function (el) {
     return 'type' in el && (el.type === 'checkbox' || el.type === 'radio') ?
             el.checked :
-            (typeof el.value === 'string')
-              ? !!el.value.length
-              : false;
+            (typeof el.value === 'string') ? !!el.value.length : false;
   },
 
   // Numbers, Sizes
