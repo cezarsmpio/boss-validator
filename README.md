@@ -307,7 +307,7 @@ You can create and override an idiom to another. `boss-validator` loads by defau
 ```javascript
 import { ja } from 'boss-validator/js/languages/all';
 
-Boss.loadLanguage(japanese);
+Boss.loadLanguage(ja);
 
 // or
 
