@@ -76,11 +76,11 @@ let Boss = {
       let el = data[name];
       let elType = self._typeof(el);
 
-      if (elType === 'string' || elType === 'object') {
+      if (typeof el !== 'undefined' && (elType === 'string' || elType === 'object' || elType === 'htmlinputelement')) {
         let rules = validations[name];
         let rulesKeys = Object.keys(rules);
 
-        if (elType === 'string' || !el.hasOwnProperty('value')) {
+        if (elType === 'string' && elType.indexOf('html') === -1) {
           el = {
             value: el
           };
@@ -137,7 +137,7 @@ let Boss = {
       } // end if
     } // end for
 
-    if (self._typeof(data) === 'htmlformelement' && self.options.appendErrors) self._appendErrors();
+    if (self._typeof(data) === 'htmlformelement' && self.options.appendErrors && self.errors.length) self._appendErrors();
 
     if (self.errors.length) return Promise.reject(self.errors);
 
