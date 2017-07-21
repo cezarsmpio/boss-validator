@@ -30,7 +30,7 @@ const messages = {
 
   // Regex
   email: 'Por favor, insira um endereço de email válido.',
-  url: 'Por favor, insira um endereço de URL válido com http:// or https://',
+  url: 'Por favor, insira um endereço de URL válido com http:// ou https://',
   https: 'O endereço URL deve começar com https://',
   credit_card: 'Por favor, insira um número de cartão de crédito válido.',
   ip_v4: 'Por favor, insira um endereço de IPV4 válido. (ex: 172.16.254.1)',
