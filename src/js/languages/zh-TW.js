@@ -29,12 +29,12 @@ const messages = {
   boolean: '此欄必須為 "是" 或 "否"。',
 
   // Regex
-  email: '請填寫正確的郵件信箱地址 (ex: user@gmail.com)。',
+  email: '請填寫正確的郵件信箱地址 (例: user@gmail.com)。',
   url: '請填寫正確的網址，以 http:// 或 https:// 開頭。',
   https: '您的網址必須以 https:// 開頭。',
   credit_card: '請填寫正確的信用卡卡號。',
-  ip_v4: '請填寫正確的 IPV4 地址。 (ex: 172.16.254.1)',
-  ip_v6: '請填寫正確的 IPV6 地址。 (ex: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
+  ip_v4: '請填寫正確的 IPV4 地址。 (例: 172.16.254.1)',
+  ip_v6: '請填寫正確的 IPV6 地址。 (例: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
   alpha: '請填寫英文字母。',
   alpha_numeric: '請勿填寫英文字母及數字以外的特殊符號。',
 };
