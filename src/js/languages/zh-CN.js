@@ -1,4 +1,4 @@
-// Chinese
+// Simplified Chinese
 const messages = {
   default: 'Please fill in this field.',
   required: 'This field is required.',
@@ -18,7 +18,7 @@ const messages = {
 
   // Strings
   exact: 'Must contain the following characters: {val}',
-  extensions: 'Please upload a filen de with the following extensions: {val}.',
+  extensions: 'Please upload a file with the following extensions: {val}.',
   contains: 'Must contain the following value: {val}.',
   minlength: 'Must be at least {val} characters long.',
   maxlength: 'Must be less than {val} characters long.',
