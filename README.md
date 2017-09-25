@@ -179,7 +179,7 @@ By the way, we have some pre-defined messages in other languages. The languages 
 * Japanese - _Translation needed_
 * Brazilian Portuguese - _Finished_
 * Russian - _Finished_
-* Chinese - _Translation needed_
+* Chinese - _Finished_
 * Ukrainian - _Finished_
 * Norwegian (Bokmål) - _Finished_
 
