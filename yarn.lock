@@ -3298,9 +3298,9 @@ webpack-dev-server@^1.15.1:
     supports-color "^3.1.1"
     webpack-dev-middleware "^1.4.0"
 
-webpack-polyfill-service-plugin@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/webpack-polyfill-service-plugin/-/webpack-polyfill-service-plugin-0.0.2.tgz#fcef244b4390f95b92a5556e1ba2cf9652f218d9"
+webpack-polyfill-service-plugin@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/webpack-polyfill-service-plugin/-/webpack-polyfill-service-plugin-0.0.4.tgz#f11089d67ef6650815131a7f8f7319b6d99020ff"
   dependencies:
     polyfill-service "^3.3.0"
     webpack-core "^0.6.6"
