@@ -1,42 +1,42 @@
 // German (Standard)
 const messages = {
-  default: 'Please fill in this field.',
-  required: 'This field is required.',
+  default: 'Bitte füllen Sie dieses Feld aus.',
+  required: 'Dieses Feld muss ausgefüllt werden.',
   prepositions: {
-    and: ' and ',
-    or: ' or '
+    and: ' und ',
+    or: ' oder '
   },
 
   // Numbers, Sizes
-  less: 'The value needs to be less than {val}.',
-  less_equal: 'The value needs to be less than or equal to {val}.',
-  bigger: 'The value needs to be bigger than {val}.',
-  bigger_equal: 'The value needs to be less than or equal to {val}.',
-  between: 'The value must be between {val}',
-  number: 'Please enter a valid number.',
+  less: 'Der Wert muss kleiner als {val} sein.',
+  less_equal: 'Der Wert muss kleiner oder gleich {val} sein.',
+  bigger: 'Der Wert muss größer als {val} sein.',
+  bigger_equal: 'Der Wert muss kleiner oder gleich {val} sein.',
+  between: 'Der Wert muss zwischen {val} liegen',
+  number: 'Bitte geben Sie eine gültige Zahl ein.',
 
 
   // Strings
-  exact: 'Must contain the following characters: {val}',
-  extensions: 'Please upload a filen de with the following extensions: {val}.',
-  contains: 'Must contain the following value: {val}.',
-  minlength: 'Must be at least {val} characters long.',
-  maxlength: 'Must be less than {val} characters long.',
-  starts: 'This field should start with "{val}".',
-  ends: 'This field should end with "{val}".',
+  exact: 'Muss die folgenden Zeichen enthalten: {val}',
+  extensions: 'Bitte laden Sie eine Datei mit einer der folgenden Dateiendungen hoch: {val}.',
+  contains: 'Muss folgenden Wert enthalten: {val}.',
+  minlength: 'Muss mindestens {val} Zeichen lang sein.',
+  maxlength: 'Muss weniger als {val} Zeichen lang sein.',
+  starts: 'Dieses Feld sollte mit "{val}" beginnen.',
+  ends: 'Dieses Feld sollte mit "{val}" enden.',
 
   // Booleans
-  boolean: 'This field needs to be "true" or "false".',
+  boolean: 'Dieses Feld muss "wahr" oder "falsch" sein.',
 
   // Regex
-  email: 'Please provide a valid email address. (ex: user@gmail.com)',
-  url: 'Please provide a valid URL address with http:// or https://',
-  https: 'Your URL must start with https://',
-  credit_card: 'Please enter a valid credit card number.',
-  ip_v4: 'Please enter a valid IPV4 address. (ex: 172.16.254.1)',
-  ip_v6: 'Please enter a valid IPV6 address. (ex: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
-  alpha: 'Only letters are allowed.',
-  alpha_numeric: 'No special characters allowed, just numbers and letters.',
+  email: 'Bitte geben Sie eine gültige Email-Adresse an. (z.B.: user@gmail.com)',
+  url: 'Bitte geben Sie eine gültige URL-Adresse mit http:// oder https:// an',
+  https: 'Ihre URL muss mit https:// beginnen',
+  credit_card: 'Bitte geben Sie eine gültige Kreditkartennummer ein.',
+  ip_v4: 'Bitte geben Sie eine gültige IPV4-Adresse ein. (z.B.: 172.16.254.1)',
+  ip_v6: 'Bitte geben Sie eine gültige IPV6-Adresse ein. (z.B.: 3ffe:1900:4545:3:200:f8ff:fe21:67cf)',
+  alpha: 'Nur Buchstaben sind erlaubt.',
+  alpha_numeric: 'Keine Sonderzeichen erlaubt, nur Zahlen und Buchstaben.',
 };
 
 module.exports = messages;
