@@ -34,7 +34,7 @@
     "babel-preset-es2015": "^6.14.0",
     "chai": "^3.5.0",
     "copy-webpack-plugin": "^3.0.1",
-    "es6-promise": "^3.2.1",
+    "es6-promise": "^4.2.2",
     "jsdom": "9.8.3",
     "jsdom-global": "2.1.0",
     "jshint": "^2.9.3",
