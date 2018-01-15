@@ -42,7 +42,7 @@
     "mocha": "^3.1.2",
     "mocha-jsdom": "^1.1.0",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.1",
+    "webpack-dev-server": "^2.11.0",
     "webpack-polyfill-service-plugin": "0.0.2",
     "webpack-polyfills-plugin": "0.0.9"
   },
