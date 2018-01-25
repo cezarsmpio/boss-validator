@@ -35,7 +35,7 @@
     "chai": "^3.5.0",
     "copy-webpack-plugin": "^3.0.1",
     "es6-promise": "^3.2.1",
-    "jsdom": "9.8.3",
+    "jsdom": "11.6.1",
     "jsdom-global": "2.1.0",
     "jshint": "^2.9.3",
     "jshint-loader": "^0.8.3",
