@@ -44,7 +44,7 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
     "webpack-polyfill-service-plugin": "0.0.4",
-    "webpack-polyfills-plugin": "0.0.9"
+    "webpack-polyfills-plugin": "0.1.0"
   },
   "dependencies": {
     "form-serialize": "^0.7.2"

@@ -3493,9 +3493,9 @@ webpack-polyfill-service-plugin@0.0.4:
     polyfill-service "^3.3.0"
     webpack-core "^0.6.6"
 
-webpack-polyfills-plugin@0.0.9:
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/webpack-polyfills-plugin/-/webpack-polyfills-plugin-0.0.9.tgz#2e3d60a635372155c28ab1190632ab383305e765"
+webpack-polyfills-plugin@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/webpack-polyfills-plugin/-/webpack-polyfills-plugin-0.1.0.tgz#2ca45f12115aadb40feca18cf4f5218b1e9319f7"
   dependencies:
     webpack-core "^0.6.6"
 
