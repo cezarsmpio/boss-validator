@@ -172,7 +172,7 @@ const messages = {
 By the way, we have some pre-defined messages in other languages. The languages supported are:
 
 * English (Default)
-* German (Standard) - _Translation needed_
+* German (Standard) - _Finished_
 * Spanish - _Translation needed_
 * French - _Translation needed_
 * Italian - _Translation needed_
