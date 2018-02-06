@@ -47,6 +47,6 @@
     "webpack-polyfills-plugin": "0.0.9"
   },
   "dependencies": {
-    "form-serialize": "^0.7.1"
+    "form-serialize": "^0.7.2"
   }
 }
