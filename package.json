@@ -39,7 +39,7 @@
     "jsdom-global": "3.0.2",
     "jshint": "^2.9.3",
     "jshint-loader": "^0.8.3",
-    "mocha": "^3.1.2",
+    "mocha": "^5.0.0",
     "mocha-jsdom": "^1.1.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1",
