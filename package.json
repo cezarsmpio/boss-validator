@@ -42,7 +42,7 @@
     "jshint-loader": "^0.8.3",
     "mocha": "^5.0.1",
     "mocha-jsdom": "^1.1.0",
-    "webpack": "^3.11.0",
+    "webpack": "^4.8.3",
     "webpack-dev-server": "^2.11.1",
     "webpack-polyfill-service-plugin": "0.0.4",
     "webpack-polyfills-plugin": "0.2.0"
