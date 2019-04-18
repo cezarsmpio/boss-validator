@@ -76,7 +76,7 @@ let Boss = {
       let el = data[name];
       let elType = self._typeof(el);
 
-      if (typeof el !== 'undefined' && (elType === 'string' || elType === 'object' || elType === 'htmlinputelement')) {
+      if (typeof el !== 'undefined' && (elType === 'string' || elType === 'object' || elType === 'htmlinputelement' || elType == 'htmlselectelement') ) {
         let rules = validations[name];
         let rulesKeys = Object.keys(rules);
 
