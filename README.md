@@ -80,7 +80,7 @@ bower install boss-validator
 
 #### CDN
 ```html
-<script src="https://cdn.rawgit.com/cezarlz/boss/master/dist/js/boss.min.js"></script>
+<script src="https://unpkg.com/boss-validator/dist/js/boss.min.js"></script>
 ```
 
 ## Validators
